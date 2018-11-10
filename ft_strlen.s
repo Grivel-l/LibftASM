@@ -2,15 +2,11 @@ section .text
 	global ft_strlen
 
 ft_strlen:
-	mov rax, 0
-	mov rbx, rdi
-	rec:
-	mov cl, [rdi]
-	cmp cl, 0
-	je done
-	inc rax
-	inc rdi
-	jmp rec
-done:
+	mov al, 0
+	mov rcx, -1
+	repne scasb
+	add rcx, 2
+	neg rcx
+	mov rax, rcx
 	ret
 
