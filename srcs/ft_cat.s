@@ -8,8 +8,8 @@ section .text
 	extern ft_puts
 	extern ft_bzero
 
-; TODO Check access to the file
 ft_cat:
+	push 0x0
 	cmp di, 0
 	jl failed
 	call read
@@ -22,6 +22,8 @@ read:
 	mov rsi, buffer
 	mov rdx, SIZE
 	syscall
+	cmp rax, 0
+	jb clear
 	push rax
 	mov rdi, buffer
 	call ft_puts
@@ -33,6 +35,12 @@ read:
 	pop rdi
 	je read
 
+clear:
+	pop rax
+	cmp rax, 0x0
+	jne clear
+	jmp failed
+
 failed:
-	mov rax, 1
+	mov rax, -1
 	ret
