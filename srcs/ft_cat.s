@@ -1,12 +1,14 @@
-%define BUFFER 2048
+%define SIZE 2048
 
 section .bss
-	buffer resb BUFFER
+	buffer resb SIZE
 
 section .text
 	global ft_cat
 	extern ft_puts
+	extern ft_bzero
 
+; TODO Check access to the file
 ft_cat:
 	cmp di, 0
 	jl failed
@@ -15,14 +17,21 @@ ft_cat:
 	ret
 
 read:
+	push rdi
 	mov rax, 0
 	mov rsi, buffer
-	mov rdx, BUFFER
+	mov rdx, SIZE
 	syscall
+	push rax
 	mov rdi, buffer
 	call ft_puts
-	mov rax, 0
-	ret
+	mov rdi, buffer
+	mov rsi, SIZE
+	call ft_bzero
+	pop rax
+	cmp rax, SIZE
+	pop rdi
+	je read
 
 failed:
 	mov rax, 1
