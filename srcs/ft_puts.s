@@ -4,12 +4,12 @@ section .text
 ft_puts:
 	push rdi
 	mov rbx, 0
-_yo:
+_rec:
 	inc rdi
 	inc rbx
 	mov cl, [rdi]
 	cmp cl, 0
-	jne _yo
+	jne _rec
 	mov rax, 1
 	mov rdi, 1
 	pop rsi
