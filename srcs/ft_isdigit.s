@@ -1,14 +1,17 @@
+global ft_isdigit
+
 section .text
-	global ft_isdigit
-
-ft_isdigit:
-	cmp rdi, 48
-	jb isnot
-	cmp rdi, 57
-	ja isnot
-	mov rax, 1
-	ret
-
-isnot:
-	mov rax, 0
-	ret
+  ft_isdigit:
+    push rbp
+    mov rbp, rsp
+    cmp rdi, 48
+    jb end
+    cmp rdi, 57
+    ja end
+    mov rax, 1
+    pop rbp
+    ret
+  end:
+    mov rax, 0
+    pop rbp
+    ret

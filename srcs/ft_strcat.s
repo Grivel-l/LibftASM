@@ -1,25 +1,29 @@
+global ft_strcat
+
 section .text
-	global ft_strcat
-
-ft_strcat:
-	push rdi
-	jmp fwd_dest
-	rec:
-	mov cl, [rsi]
-	cmp cl, 0
-	je done
-	mov [rdi], cl
-	inc rdi
-	inc rsi
-	jmp rec
-
-fwd_dest:
-	mov cl, [rdi]
-	cmp cl, 0
-	je rec
-	inc rdi
-	jmp fwd_dest
-
-done:
-	pop rax
-	ret
+  ft_strcat:
+    push rbp
+    mov rbp, rsp
+    push rdi
+    jmp fwd
+    cat:
+      mov al, [rsi]
+      cmp al, 0
+      je appendNull
+      mov [rdi], al
+      inc rdi
+      inc rsi
+      jmp cat
+  fwd:
+    mov al, [rdi]
+    cmp al, 0
+    je cat
+    inc rdi
+    jmp fwd
+  appendNull:
+    inc rdi
+    mov byte [rdi], 0
+  done:
+    pop rax
+    pop rbp
+    ret

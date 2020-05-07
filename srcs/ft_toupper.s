@@ -1,15 +1,18 @@
+global ft_toupper
+
 section .text
-	global ft_toupper
-
-ft_toupper:
-	cmp rdi, 97
-	jb isnot
-	cmp rdi, 122
-	ja isnot
-	mov rax, rdi
-	xor rax, 0x20
-	ret
-
-isnot:
-	mov rax, rdi
-	ret
+  ft_toupper:
+    push rbp
+    mov rbp, rsp
+    cmp rdi, 97
+    jb end
+    cmp rdi, 122
+    ja end
+    mov rax, rdi
+    sub rax, 32
+    pop rbp
+    ret
+  end:
+    mov rax, rdi
+    pop rbp
+    ret

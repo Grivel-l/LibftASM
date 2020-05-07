@@ -1,18 +1,16 @@
-section .text
-	global ft_puts
+global ft_puts
+extern ft_strlen
 
-ft_puts:
-	push rdi
-	mov rbx, 0
-_rec:
-	inc rdi
-	inc rbx
-	mov cl, [rdi]
-	cmp cl, 0
-	jne _rec
-	mov rax, 1
-	mov rdi, 1
-	pop rsi
-	mov rdx, rbx
-	syscall
-	ret
+section .text
+  ft_puts:
+    push rbp
+    mov rbp, rsp
+    push rdi
+    call ft_strlen
+    mov rdx, rax
+    mov rax, 1
+    mov rdi, 1,
+    pop rsi
+    syscall
+    pop rbp
+    ret

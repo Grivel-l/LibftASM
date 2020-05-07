@@ -1,10 +1,13 @@
-section .text
-	global ft_memset
+global ft_memset
 
-ft_memset:
-	push rdi
-	mov cx, dx
-	mov al, sil 
-	repne stosb
-	pop rax
-	ret
+section .text
+  ft_memset:
+    push rbp
+    mov rbp, rsp
+    push rdi
+    mov rcx, rdx
+    mov eax, esi 
+    repne stosb
+    pop rax
+    pop rbp
+    ret

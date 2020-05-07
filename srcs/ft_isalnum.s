@@ -1,34 +1,26 @@
+global ft_isalnum
+
 section .text
-	global ft_isalnum
-
-ft_isalnum:
-	jmp firstcheck
-
-firstcheck:
-	cmp rdi, 48
-	jb failed
-	cmp rdi, 57
-	ja secondcheck
-	jmp success
-
-secondcheck:
-	cmp rdi, 65
-	jb failed
-	cmp rdi, 90
-	ja thirdcheck
-	jmp success
-
-thirdcheck:
-	cmp rdi, 97
-	jb failed
-	cmp rdi, 122
-	ja failed
-	jmp success
-
-failed:
-	mov rax, 0
-	ret
-
-success:
-	mov rax, 1
-	ret
+  ft_isalnum:
+    push rbp
+    mov rbp, rsp
+    cmp rdi, 48
+    jb end
+    cmp rdi, 58
+    jb success
+    cmp rdi, 65
+    jb end
+    cmp rdi, 91
+    jb success
+    cmp rdi, 97
+    jb end
+    cmp rdi, 123
+    jb success
+    end:
+      mov rax, 0
+      pop rbp
+      ret
+    success:
+      mov rax, 1
+      pop rbp
+      ret

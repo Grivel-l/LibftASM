@@ -1,15 +1,18 @@
+global ft_tolower
+
 section .text
-	global ft_tolower
-
-ft_tolower:
-	cmp rdi, 65
-	jb isnot
-	cmp rdi, 90
-	ja isnot
-	mov rax, rdi
-	xor rax, 0x20
-	ret
-
-isnot:
-	mov rax, rdi
-	ret
+  ft_tolower:
+    push rbp
+    mov rbp, rsp
+    cmp rdi, 65
+    jb end
+    cmp rdi, 90
+    ja end
+    mov rax, rdi
+    add rax, 32
+    pop rbp
+    ret
+  end:
+    mov rax, rdi
+    pop rbp
+    ret

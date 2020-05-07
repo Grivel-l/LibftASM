@@ -1,14 +1,17 @@
+global ft_bzero
+
 section .text
-	global ft_bzero
-
-ft_bzero:
-	mov rbx, 0
-	rec:
-	cmp rbx, rsi
-	je done
-	mov word [rdi], 0
-	inc rdi
-	inc rbx
-	jmp rec
-
-done:
+  ft_bzero:
+    push rbp
+    mov rbp, rsp
+    mov rax, 0
+    loop:
+      cmp rax, rsi
+      je done
+      mov byte [rdi], 0
+      inc rdi
+      inc rax
+      jmp loop
+  done:
+    pop rbp
+    ret
